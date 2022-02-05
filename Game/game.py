@@ -8,15 +8,20 @@ def slow_typing():
     for w in sentence:
         sys.stdout.write(w)
         sys.stdout.flush()
-        time.sleep(0.05)     
+        time.sleep(0.05)
 
-name = input("Do you want to choose your OWN name or go with a RANDOM one?")
-if name.lower() == "own":
-    name = input('What do you want to be known as?')
-elif name.lower() == "random":
-    name = random.choice(name_list)
-else:
-    print("Invalid Choice")
+
+while True:
+    name = input("Do you want to choose your OWN name or go with a RANDOM one?")
+    if name.lower() == "own":
+        name = input('What do you want to be known as?')
+        break
+    elif name.lower() == "random":
+        name = random.choice(name_list)
+        break
+    else:
+        print("Invalid Choice")
+        continue
 
 sentence = f"{name} begins their journey across the dark lands as a daemon of the netherworlds!"
 slow_typing()
@@ -74,7 +79,7 @@ def monster_damage_to_player():
 def game_over():
     print("\nYou have been slain by", monster['name'], "it's game over!")
     input("\nPress any button to exit the game.")
-    sys.exit
+    sys.exit()
 
 def player_chance_to_hit():
     to_hit = random.randint(1,100) + (player_stats['dex'] * 10)
@@ -131,18 +136,19 @@ gain_experience()
 
 sentence = "\nHaving defeated the fearsome bloodthirsty bat, you continue on your journey upwards to stairway you found hidden in the shadows..."
 slow_typing()
-
+sleep(1)
 sentence = "\nWalking up the stairway, you notice there's a greenish glow to the cavern lighting, it reminds you of something, but you can't quite figure out what.."
 slow_typing()
-
+sleep(1)
 sentence = "\nAs you reach the floor above you, you notice that the floor appears to have small puddles of liquid in it, you think to yourself 'not slimes please' "
 slow_typing()
-
+sleep(1)
 sentence = "\nWalking onwards from the path infront of you, the tunnel comes to a crossroads, having to choose left or right."
 slow_typing()
-
+sleep(1)
 sentence = "\nWhile contemplating this big decision a group of bats swoops through the skies from the left side!"
 slow_typing()
+sleep(1)
 
 monster = wyvern
 
@@ -159,3 +165,20 @@ elif choice.lower() == "left":
         sleep(0.5)
         monster_chance_to_hit()
         sleep(0.5)
+        if monster['health'] <= 0:
+            gain_experience()
+            break
+
+def game_win():
+    print("\nCongratulations on making it this far :) more to come maybe")
+    input("\nPress any button to exit the game.")
+    sys.exit()
+
+sentence = "\nHaving reached the upper floor, you see a glimmer of light being emitted from the distance, you rush towards it.."
+slow_typing()
+sentence = "\nGetting closer to the exit you notice a thick smog coming up from behind you, so you quicken up your pace to reach the light."
+slow_typing()
+sentence = "\nYou succesfully make it out of the cave and into the world above! This is where your adventure truly begins"
+slow_typing()
+game_win()
+
